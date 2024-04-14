@@ -93,7 +93,7 @@ def main():
 
 
     # carregarCandidatosBD(candidatos)
-    carregarConcursosBD(concursos)
+    # carregarConcursosBD(concursos)
 
     
     return 0 

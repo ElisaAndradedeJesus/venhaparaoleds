@@ -30,14 +30,30 @@ button{
 input{
     width: 90%;
     margin-left: 5%;
+    margin-right: 5%;
     border-radius: 5px;
     border-style:groove;
     border-color:rgb(223, 223, 223) ;
     border-width: 1px;
+    margin-bottom: 0%;
 }
 
 #buttonContainer{
     width: 80%;
     margin-left: 10%;
     align-content: center;
+    margin-top: 3%;
+    margin-right: 10%;
+}
+p{
+    margin-left: 5%;
+    color: red !important;
+    padding-inline-end: 0%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-right: 5%;
+    text-align: center;
+    font-size:x-small;
+    display:none;
+
 }

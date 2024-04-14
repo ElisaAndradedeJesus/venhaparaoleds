@@ -2,16 +2,20 @@
 <html lang="pt-br">
   <head>
     <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js" defer></script>
   </head>
   <body>
     <form>
         <h1>Pesquise aqui:</h1>
 
-        <input type="text" name="cd_nome" id="cd_nome" ><br><br>
+        <input type="text" id="cpfOuCodigo" ><br>
+        <p id = "campoVazio">O campo não pode estar vazio!</p>
+        <p id = "valorInvalido">Favor inserir um CPF ou Código válido!</p>
+        <p id = "naoCadastrado">Este CPF/Código não está cadastrado</p>
 
         <div id ="buttonContainer">
-        <button onclick="">Buscar editais</button>
-        <button onclick="">Buscar candidatos</button>
+        <button id ="buscarEditais">Buscar editais</button>
+        <button id = "buscarCandidatos">Buscar candidatos</button>
         </div>
 
 
