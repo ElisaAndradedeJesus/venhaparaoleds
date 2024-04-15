@@ -6,6 +6,8 @@ const campoVazio = document.getElementById("campoVazio");
 const valorInvalido = document.getElementById("valorInvalido");
 const naoCadastrado = document.getElementById("naoCadastrado");
 
+const url = "http://localhost:3000/"
+
 function contador(string){
     let cont = 0;
     let s = ''
@@ -14,6 +16,31 @@ function contador(string){
         cont =  cont+1;
     }
     return cont;
+}
+
+function getEditais(){
+    let body = {
+        "cpf":cpfOuCodigo.value
+    }
+    let request = new XMLHttpRequest();
+    request.open("GET",url + "buscarEditais",true);
+    request.setRequestHeader("Content-type","application/json");
+    request.send(body)
+
+    request.onload = function(){
+        console.log(this.responseText)
+        console.log(this.response)
+    }
+
+}
+
+function getCandidatos(){
+    let request = new XMLHttpRequest();
+    request.open("GET",url + "buscarCandidatos/"+ cpfOuCodigo.value,true);
+    request.onload = function(){
+        console.log(responseText);
+    }
+
 }
 
 function validarCampo(e){
@@ -26,8 +53,7 @@ function validarCampo(e){
         e.preventDefault(); 
     }
     let cont = contador(cpfOuCodigo.value);
-    console.log(cont);
-    if((cont < 11) || (cont> 14)){
+    if((cont != 0 && (cont < 11) || (cont> 14))){
         valorInvalido.style.display = "flex";
         e.preventDefault();
     } else {
@@ -38,10 +64,12 @@ function validarCampo(e){
 
 buscarEditais.addEventListener("click", function(e) {
     validarCampo(e);
+    getEditais();
 
   });
 
 buscarCandidatos.addEventListener("click", function(e) {
     validarCampo(e);
+    getCandidatos();
     
   })
