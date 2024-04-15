@@ -198,11 +198,13 @@ def main():
     # carregarCandidatosBD(candidatos)
     # carregarConcursosBD(concursos)
 
-    cpfOuCod,tipo = parametroDaPesquisa()
-    if tipo == 'c':
-        buscarConcursos(candidatos,concursos,cpfOuCod)
-    if tipo == 'e':
-        buscarCandidatos(candidatos,concursos,cpfOuCod)
+    #tentativa de resolver o problema em python puro, não ficou bom, mas funciona
+
+    # cpfOuCod,tipo = parametroDaPesquisa()
+    # if tipo == 'c':
+    #     buscarConcursos(candidatos,concursos,cpfOuCod)
+    # if tipo == 'e':
+    #     buscarCandidatos(candidatos,concursos,cpfOuCod)
     
 
     
