@@ -72,3 +72,10 @@ Você será desclassifiado nas seguintes situações:
 1. Se submeter um solução que não funcione; 
 2. Se não cumprir os critérios presentes no seção **Avaliação**;
 3. Se cometer plágio.
+
+O que foi feito?
+-o desafio foi concluído utilizando apenas python no arquivo encherBD.py
+-para concluir o desafio utilizando FrontEnd API e BD é necessário terminar a conexão entre o front e a API
+-O BD foi concluido.
+
+
