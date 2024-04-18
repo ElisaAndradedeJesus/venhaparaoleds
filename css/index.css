@@ -14,6 +14,19 @@ form{
     color:#637E8A;
     padding-bottom: 20px;
 }
+#oQueBuscar{
+    max-width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    border-radius: 8px;
+    color:#637E8A;
+    padding-bottom: 20px;
+}
+li{
+    list-style-type: none;
+    display: none;
+}
+
 h1{
     text-align: center;
 }

@@ -6,8 +6,14 @@ const campoVazio = document.getElementById("campoVazio");
 const valorInvalido = document.getElementById("valorInvalido");
 const naoCadastrado = document.getElementById("naoCadastrado");
 
-const url = "http://localhost:3000/"
+const cpfCod = document.getElementById("cpfCod");
+const profVaga = document.getElementById("profVaga");
+// nomes campos
+const identificaCodCPF = document.getElementById("identificaCodCPF");
+const profissoes = document.getElementById("profissoes");
 
+const url = "http://localhost:3000/"
+let dados = {}
 function contador(string){
     let cont = 0;
     let s = ''
@@ -18,14 +24,60 @@ function contador(string){
     return cont;
 }
 
-function getEditais(){
-    let body = {
-        "cpf":cpfOuCodigo.value
+function getVagasDoEdital(){
+    fetch(url + "getVagasDoEdital/"+ cpfOuCodigo.value)
+        .then(response => response.json())
+        .then(data => {
+            cpfCod.innerHTML = cpfOuCodigo.value
+            profVaga.innerHTML = data
+            identificaCodCPF.innerHTML = "Código do Edital buscado"
+            profissoes.innerHTML = "Vagas apertas para:"
+
+            cpfCod.style.display = "flex"
+            profVaga.style.display = "flex"
+            identificaCodCPF.style.display = "flex"
+            profissoes.style.display = "flex"
+
+            dados["profissoes"] = data
+        })
+        .catch(error => console.log(error))
+
+}
+function fromObjectToArray(){
+    // let array = Object.values(dados)
+    let array = []
+    console.log(array)
+    console.log(dados)
+    console.log(dados["profissoes"])
+    for(let chave in dados){
+        array.push(dados[chave])
     }
+    console.log(array)
+}
+function getCandidatos(){
+    getVagasDoEdital()
+    console.log(dados)
+    fromObjectToArray()
+    // console.log(fromObjectTOArray)
+
+
+    for(let i = 0; i < dados["profissoes"].length; i++){
+        console.log(dados["profissoes"][i])
+    }
+    fetch(url+""+cpfOuCodigo.value)
+    .then(response => response.json())
+    .then(data => {})
+    .catch(error => console.log(error))
+      
+
+}
+
+function getEditais(){
+
     let request = new XMLHttpRequest();
-    request.open("GET",url + "buscarEditais",true);
+    request.open("GET",url + "buscarEditais",false);
     request.setRequestHeader("Content-type","application/json");
-    request.send(body)
+
 
     request.onload = function(){
         console.log(this.responseText)
@@ -33,15 +85,11 @@ function getEditais(){
     }
 
 }
-
-function getCandidatos(){
-    let request = new XMLHttpRequest();
-    request.open("GET",url + "buscarCandidatos/"+ cpfOuCodigo.value,true);
-    request.onload = function(){
-        console.log(responseText);
-    }
-
+function getProfissoesCandidato(){
+    
 }
+
+
 
 function validarCampo(e){
 
@@ -63,12 +111,20 @@ function validarCampo(e){
 }
 
 buscarEditais.addEventListener("click", function(e) {
+    cpfCod.style.display = "none"
+    profVaga.style.display = "none"
+    identificaCodCPF.style.display = "none"
+    profissoes.style.display = "none"
     validarCampo(e);
     getEditais();
 
   });
 
 buscarCandidatos.addEventListener("click", function(e) {
+    cpfCod.style.display = "none"
+    profVaga.style.display = "none"
+    identificaCodCPF.style.display = "none"
+    profissoes.style.display = "none"
     validarCampo(e);
     getCandidatos();
     
