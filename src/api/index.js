@@ -33,48 +33,33 @@ app.get('/getProfissoesDoCandidato/:cpf', (req, res) => {
       res.json(profissoes)
     })
   })
-})
-app.get('/getEditaisCompativeis/:cpf', (req, res) => {
-  const CPF = req.params.cpf; 
-  let cliente = new pg.Client(dataBase)
-  let profissoes = []
-  let vagasCompativeis = []
+})   
+app.get('/getEditaisCompativeis/:profissao', (req, res) => {
+  const PROFISSAO = req.params.profissao; 
+  const cliente = new pg.Client(dataBase)
+
 
   cliente.connect(function(err) { 
     if(err) {
-      return console.error('could not connect to postgres', err)
+      return console.error('could not connect to postgres', err)  
     }
-    let cpf = "'" + CPF + "'";
-    
-
-    cliente.query('SELECT profissao FROM "public"."candidato" where cpf = ' + cpf +';', function(err, result) {
+    let profissao = "'%" + PROFISSAO+ "%'"
+    let sql = 'SELECT orgao,edital,codigo_concurso FROM concurso where lista_vagas like '+profissao+';'
+    cliente.query(sql, function(err, result) {
       if(err) {
         console.error('error running query', err)
       }
-      // profissoes.push(result.rows[0].split(','))
+      let vagasCompativeis= result.rows
+      let vagasCompativeisUnicas = new Set(vagasCompativeis)
+      let editaisCompativeis = Array.from(vagasCompativeisUnicas)
 
-      for(let posicao_profissao = 0; posicao_profissao<profissoes.lenght;posicao_profissao++){
-        let profissao = "'%" + profissoes[posicao_profissao]+ "%'"
-        cliente.end();
-        res.json(profissao)
-        
-        cliente.query('SELECT orgao,edital,codigo_concurso FROM "public"."concurso" where lista_vagas like '+ profissao+';', function(err, result2) {
-          if(err) {
-            console.error('error running query', err)
-          }
-          vagasCompativeis.push(result2.rows.json())
+      res.json(editaisCompativeis)
 
-          
-        })
-      }
+      
     })
-  })
-  
-  // console.log(vagasCompativeis)
-  let vagasCompativeisUnicas = new Set(vagasCompativeis)
-  let editaisCompativeis = Array.from(vagasCompativeisUnicas)
-  
+    cliente.end()
 
+  })
 
 })
   
@@ -93,7 +78,6 @@ app.get('/getVagasDoEdital/:cod', (req, res) => {
       if(err) {
         console.error('error running query', err)
       }
-      // let vagas = result.rows[0]["lista_vagas"].split(",")
       cliente.end();
       let vagas = new Set(result.rows[0]["lista_vagas"].split(","))
       let vagasCompativeis = Array.from(vagas)

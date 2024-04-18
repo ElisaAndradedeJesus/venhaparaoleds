@@ -77,5 +77,7 @@ O que foi feito?
 -o desafio foi concluído utilizando apenas python no arquivo encherBD.py
 -para concluir o desafio utilizando FrontEnd API e BD é necessário terminar a conexão entre o front e a API
 -O BD foi concluido.
+-3 dos 4 caminhos da api funcionam e outro possui um erro ainda desconhecido
+-
 
 
